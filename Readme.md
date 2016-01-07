@@ -78,7 +78,9 @@ Your saved values will be accessible from any worker.
 
 #### Running the tests
 
-If you happen to add any coverage to the example app, launch unit tests via ```
+If you happen to add any coverage to the example app, launch unit tests via 
+
+```
 ./make.py eunit
 ```
 
