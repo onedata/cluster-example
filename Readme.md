@@ -50,11 +50,13 @@ To check status of the cluster examine XML returned via:
 curl -v http://<IP of any worker>:6666/nagios
 ```
 
-IP of worker may be retrieved by ```
+IP of worker may be retrieved by 
+```
 docker inspect <Docker ContainerID>
 ```
 
-DockerID can belong to any worker. To find worker containers look for names like *worker@...* in output of ```
+DockerID can belong to any worker. To find worker containers look for names like *worker@...* in output of 
+```
 docker ps
 ```
 
