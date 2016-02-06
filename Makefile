@@ -53,6 +53,7 @@ rel: generate
 complete_rel: generate cm_rel
 
 cm_rel:
+	rm -rf cluster_manager || true
 	ln -sf deps/cluster_worker/cluster_manager/
 	make -C cluster_manager/ rel
 
