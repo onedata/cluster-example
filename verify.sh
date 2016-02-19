@@ -57,8 +57,8 @@ echo '
 '
 echo -------------------------------
 echo waiting for store getting consistent
-echo sleep 5s
-sleep 5s
+echo sleep 15s
+sleep 15s
 
 echo '
 '
