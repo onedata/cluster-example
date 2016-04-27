@@ -31,7 +31,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     '-i', '--image',
     action='store',
-    default='onedata/builder',
+    default='onedata/builder:v25',
     help='docker image to use for building',
     dest='image')
 

@@ -15,7 +15,7 @@ from . import appmock, client, common, globalregistry, cluster_manager, \
 
 
 def default(key):
-    return {'image': 'onedata/worker',
+    return {'image': 'onedata/worker:v25',
             'bin_am': '{0}/appmock'.format(os.getcwd()),
             'bin_gr': '{0}/globalregistry'.format(os.getcwd()),
             'bin_op_worker': '{0}/op_worker'.format(os.getcwd()),
@@ -120,7 +120,7 @@ def up(config_path, image=default('image'), bin_am=default('bin_am'),
         ./env_configurator.escript \'{0}\''''
         command = command.format(json.dumps(env_configurator_input))
         docker.run(
-            image='onedata/builder',
+            image='onedata/builder:v25',
             interactive=True,
             tty=True,
             rm=True,
