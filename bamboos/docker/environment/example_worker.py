@@ -14,8 +14,8 @@ def up(image, bindir, dns_server, uid, config_path, logdir=None,
        storages_dockers=None, luma_config=None):
     return worker.up(image, bindir, dns_server, uid, config_path,
                      ExampleConfigurator(), logdir,
-                     storages_dockers=storages_dockers,
-                     luma_config=luma_config)
+                     storages_dockers=None,
+                     luma_config=None)
 
 
 class ExampleConfigurator:

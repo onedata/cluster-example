@@ -12,7 +12,7 @@ import copy
 import json
 import time
 from . import appmock, client, common, zone_worker, cluster_manager, \
-    worker, provider_worker, cluster_worker, docker, dns, s3, ceph, nfs, \
+    worker, provider_worker, cluster_worker, docker, dns, ceph, nfs, \
     amazon_iam, luma, example_worker
 
 
