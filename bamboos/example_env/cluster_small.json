@@ -12,7 +12,10 @@
     "os_configs": {
         "cfg1": {
             "storages": [
-                "/mnt/st1"
+                {
+                    "type": "posix",
+                    "name": "/mnt/st1"
+                }
             ],
             "users": [
                 "user1"
@@ -26,7 +29,7 @@
     },
     "cluster_domains": {
         "p1": {
-            "db_driver": "couchbase",
+            "db_driver": "couchdb",
             "os_config": "cfg1",
             "cluster_manager": {
                 "cm1": {
@@ -34,10 +37,12 @@
                         "setcookie": "cookie1"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm1"
-                        ],
-                        "worker_num": 1
+                        "cluster_manager": {
+                            "cm_nodes": [
+                                "cm1"
+                            ],
+                            "worker_num": 1
+                        }
                     }
                 }
             },
@@ -47,13 +52,15 @@
                         "setcookie": "cookie1"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm1"
-                        ],
-                        "db_nodes": [
-                            "riaknode1"
-                        ],
-                        "verify_gr_cert": false
+                        "cluster_worker": {
+                            "cm_nodes": [
+                                "cm1"
+                            ],
+                            "db_nodes": [
+                                "dbnode1"
+                            ],
+                            "verify_oz_cert": false
+                        }
                     }
                 }
             }

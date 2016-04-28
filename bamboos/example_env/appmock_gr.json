@@ -8,8 +8,8 @@
             "input_dir": "rel/op_worker",
             "target_dir": "rel/test_cluster"
         },
-        "globalregistry": {
-            "input_dir": "rel/globalregistry",
+        "oz_worker": {
+            "input_dir": "rel/oz_worker",
             "target_dir": "rel/test_cluster"
         },
         "appmock": {
@@ -24,7 +24,10 @@
     "os_configs": {
         "cfg1": {
             "storages": [
-                "/mnt/st1"
+                {
+                    "type": "posix",
+                    "name": "/mnt/st1"
+                }
             ],
             "users": [
                 "user1"
@@ -38,7 +41,7 @@
     },
     "provider_domains": {
         "p1": {
-            "db_driver": "couchbase",
+            "db_driver": "couchdb",
             "os_config": "cfg1",
             "cluster_manager": {
                 "cm1": {
@@ -46,10 +49,12 @@
                         "setcookie": "cookie1"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm1"
-                        ],
-                        "worker_num": 1
+                        "cluster_manager": {
+                            "cm_nodes": [
+                                "cm1"
+                            ],
+                            "worker_num": 1
+                        }
                     }
                 }
             },
@@ -59,29 +64,33 @@
                         "setcookie": "cookie1"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm1"
-                        ],
-                        "db_nodes": [
-                            "riaknode1"
-                        ],
-                        "global_registry_domain": "gr",
-                        "verify_gr_cert": false
+                        "op_worker": {
+                            "cm_nodes": [
+                                "cm1"
+                            ],
+                            "db_nodes": [
+                                "dbnode1"
+                            ],
+                            "oz_domain": "oz",
+                            "verify_oz_cert": false
+                        }
                     }
                 }
             }
         }
     },
     "appmock_domains": {
-        "gr": {
+        "oz": {
             "appmock": {
                 "appmock1": {
-                    "mocked_app": "globalregistry",
+                    "mocked_app": "oz_worker",
                     "vm.args": {
                         "setcookie": "cookie2"
                     },
                     "sys.config": {
-                        "app_description_file": "./example_app_description.erl"
+                        "appmock": {
+                            "app_description_file": "./example_app_description.erl"
+                        }
                     }
                 }
             }

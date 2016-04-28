@@ -5,33 +5,42 @@ This software is released under the MIT license cited in 'LICENSE.txt'
 Brings up a set of cluster-worker nodes. They can create separate clusters.
 """
 
-import os
-import subprocess
-import sys
-from . import common, docker, worker, globalregistry
+from . import worker
 
 DOCKER_BINDIR_PATH = '/root/build'
 
-def up(image, bindir, dns_server, uid, config_path, logdir=None, app_name="cluster_worker"):
-    return worker.up(image, bindir, dns_server, uid, config_path, ClusterWorkerConfigurator(app_name), logdir)
+
+def up(image, bindir, dns_server, uid, config_path, logdir=None,
+       storages_dockers=None, luma_config=None):
+    return worker.up(image, bindir, dns_server, uid, config_path,
+                     ClusterWorkerConfigurator(), logdir,
+                     storages_dockers=storages_dockers,
+                     luma_config=luma_config)
 
 
 class ClusterWorkerConfigurator:
-    def __init__(self, app_name):
-        self.app_name_value = app_name
-        pass
-
-    def tweak_config(self, cfg, uid):
+    def tweak_config(self, cfg, uid, instance):
         return cfg
 
-    def configure_started_instance(self, bindir, instance, config, output):
+    def pre_start_commands(self, domain):
+        return 'escript bamboos/gen_dev/gen_dev.escript /tmp/gen_dev_args.json'
+
+    # Called BEFORE the instance (cluster of workers) is started,
+    # once for every instance
+    def pre_configure_instance(self, instance, instance_domain, config):
         pass
 
-    def extra_volumes(self, config):
+    # Called AFTER the instance (cluster of workers) has been started
+    def post_configure_instance(self, bindir, instance, config, container_ids,
+                                output, storages_dockers=None,
+                                luma_config=None):
+        pass
+
+    def extra_volumes(self, config, bindir, instance_domain, storages_dockers):
         return []
 
     def app_name(self):
-        return self.app_name_value
+        return "cluster_worker"
 
     def domains_attribute(self):
         return "cluster_domains"
