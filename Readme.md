@@ -137,7 +137,7 @@ To extend default datastore abilities you can define own structures, that you wa
 
 1. Define records like in [example_model_def.hrl](include/datastore/example_model_def.hrl)
 2. Implement models like in [example_shared_model.erl](src/modules/datastore/models/example_shared_model.erl) and  [example_model.erl](src/modules/datastore/models/example_model.erl)
-3. Tell datastore to use it via [datastore_config_pluginl](src/modules/datastore/atastore_config_plugin.erl)
+3. Tell datastore to use it via [datastore_config_pluginl](src/modules/datastore/datastore_config_plugin.erl)
 3. Register the plugin in [app.config](rel/files/app.config).
 
 When defining the models you can select persistence policy via '''model_init''' callback.
@@ -148,11 +148,6 @@ Available strategies:
 - LOCAL_ONLY_LEVEL - save on node which performs save, do not cache
 - LOCALLY_CACHED_LEVEL - persist in db, each worker has own cache
 - GLOBALLY_CACHED_LEVEL - persist in db, all workers share cache
-
-#### Status checks
-
-1. To select which checks should be performed, implement ```healthcheck_endpoints``` callback in [http_worker_plugin_behaviour](deps/cluster_worker/src/modules/http/http_worker_plugin_behaviour.erl)
-2. Add potential check by implementing [endpoint_healthcheck_behaviour](deps/cluster_worker/src/modules/http/endpoint_healthcheck_behaviour.erl)
 
 #### Worker plugins
 
@@ -174,15 +169,6 @@ See [rest_listener](src/modules/rest/rest_listener.erl).
 Node manager handles lifetime of worker plugins and listeners. You may extend it to provide handling of own messages.
 
 See gen-server-like callbacks in  [node_manager_plugin](src/cluster_elements/node_manager/node_manager_plugin.erl).
-
-#### HTTP 
-
-Http worker plugin can extend default http handler (cowboy handler) with your dedicated behaviour. 
-It also defines what to check in order to handle healthcheck REST requests.
-
-1. Implement plugin like [http_worker_plugin](src/modules/http_worker/http_worker_plugin.erl).
-2. Register the plugin in [app.config](rel/files/app.config).
-
 
 #### Other configuration 
 
