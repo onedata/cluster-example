@@ -17,8 +17,8 @@ See deployment for notes on how to deploy the project on a live system.
 
 Required software:
 
-- python interpreter
-- docker 1.9.1
+- python 2.7.x interpreter
+- docker 1.11.x
 
 Ad that's it!
 
@@ -37,7 +37,7 @@ Build the project via:
 And run project with simple configuration:
 
 ```
-bamboos/docker/env_up.py --bin-cluster-worker .  --bin-cm cluster_manager --app-name example example_env.json
+bamboos/docker/env_up.py example_env.json
 ```
 
 This will yield running couple of docker instances. 

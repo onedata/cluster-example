@@ -159,7 +159,7 @@ def fix_sys_config_walk(element, current_app_name, parents, file_path):
 
 def apps_with_sysconfig():
     return ["cluster_manager", "appmock", "cluster_worker", "op_worker",
-            "globalregistry", "onepanel", "oneclient", "oz_worker"]
+            "globalregistry", "onepanel", "oneclient", "oz_worker", "example"]
 
 
 def get_docker_name(name_or_container):

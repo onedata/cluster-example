@@ -13,7 +13,7 @@ import json
 import time
 from . import appmock, client, common, zone_worker, cluster_manager, \
     worker, provider_worker, cluster_worker, docker, dns, s3, ceph, nfs, \
-    amazon_iam, luma
+    amazon_iam, luma, example_worker
 
 
 def default(key):
@@ -23,6 +23,7 @@ def default(key):
             'nfs_image': 'erezhorev/dockerized_nfs_server',
             'bin_am': '{0}/appmock'.format(os.getcwd()),
             'bin_oz': '{0}/oz_worker'.format(os.getcwd()),
+            'bin_example': '{0}/.'.format(os.getcwd()),
             'bin_op_worker': '{0}/op_worker'.format(os.getcwd()),
             'bin_cluster_worker': '{0}/cluster_worker'.format(os.getcwd()),
             'bin_cluster_manager': '{0}/cluster_manager'.format(os.getcwd()),
@@ -37,6 +38,7 @@ def up(config_path, image=default('image'), ceph_image=default('ceph_image'),
        bin_cluster_manager=default('bin_cluster_manager'),
        bin_op_worker=default('bin_op_worker'),
        bin_cluster_worker=default('bin_cluster_worker'),
+       bin_example=default('bin_example'),
        bin_oc=default('bin_oc'), bin_luma=default('bin_luma'),
        logdir=default('logdir')):
     config = common.parse_json_config_file(config_path)
@@ -48,6 +50,7 @@ def up(config_path, image=default('image'), ceph_image=default('ceph_image'),
         'oz_db_nodes': [],
         'cluster_manager_nodes': [],
         'op_worker_nodes': [],
+        'example_nodes': [],
         'cluster_worker_nodes': [],
         'appmock_nodes': [],
         'client_nodes': []
@@ -91,6 +94,11 @@ def up(config_path, image=default('image'), ceph_image=default('ceph_image'),
 
     # Start stock cluster worker instances
     setup_worker(cluster_worker, bin_cluster_worker, 'cluster_domains',
+                 bin_cluster_manager, config, config_path, dns_server, image,
+                 logdir, output, uid)
+
+    # Start example instances
+    setup_worker(example_worker, bin_example, 'example_domains',
                  bin_cluster_manager, config, config_path, dns_server, image,
                  logdir, output, uid)
 

@@ -49,6 +49,13 @@ parser.add_argument(
     dest='bin_op_worker')
 
 parser.add_argument(
+    '-be', '--bin-example',
+    action='store',
+    default=env.default('bin_example'),
+    help='the path to example repository (precompiled)',
+    dest='bin_example')
+
+parser.add_argument(
     '-bcw', '--bin-cluster-worker',
     action='store',
     default=env.default('bin_cluster_worker'),
@@ -109,6 +116,7 @@ output = env.up(args.config_path, image=args.image, ceph_image=args.ceph_image,
                 bin_oz=args.bin_oz,
                 bin_cluster_manager=args.bin_cluster_manager,
                 bin_op_worker=args.bin_op_worker,
+                bin_example=args.bin_example,
                 bin_cluster_worker=args.bin_cluster_worker,
                 bin_luma=args.bin_luma,
                 bin_oc=args.bin_oc, logdir=args.logdir)

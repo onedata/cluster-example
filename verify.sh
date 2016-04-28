@@ -11,8 +11,8 @@ echo '
 '
 echo -------------------------------
 echo running
-echo bamboos/docker/env_up.py --bin-cluster-worker .  --bin-cm cluster_manager --app-name example example_env.json
-ENV_DESC=`bamboos/docker/env_up.py --bin-cluster-worker .  --bin-cm cluster_manager --app-name example example_env.json`
+echo bamboos/docker/env_up.py example_env.json
+ENV_DESC=`bamboos/docker/env_up.py example_env.json`
 echo $ENV_DESC
 
 IP1=`docker ps -a | grep 'worker1' | awk '{print $1}' | xargs docker inspect --format '{{ .NetworkSettings.IPAddress }}'`

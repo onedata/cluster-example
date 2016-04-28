@@ -16,9 +16,10 @@
             "groups": {}
         }
     },
-    "cluster_domains": {
-        "p1": {
-            "db_driver": "couchbase",
+
+    "example_domains": {
+        "test": {
+            "db_driver": "couchdb",
             "os_config": "cfg1",
             "cluster_manager": {
                 "cm": {
@@ -26,10 +27,12 @@
                         "setcookie": "test_cookie"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm"
-                        ],
-                        "worker_num": 3
+                        "cluster_manager": {
+                            "cm_nodes": [
+                                "cm"
+                            ],
+                            "worker_num": 3
+                        }
                     }
                 }
             },
@@ -39,12 +42,14 @@
                         "setcookie": "test_cookie"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm"
-                        ],
-                        "db_nodes": [
-                            "127.0.0.1:49161"
-                        ]
+                        "example": {
+                            "cm_nodes": [
+                                "cm"
+                            ],
+                            "db_nodes": [
+                                "127.0.0.1:49161"
+                            ]
+                        }
                     }
                 },
                 "worker2": {
@@ -52,12 +57,14 @@
                         "setcookie": "test_cookie"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm"
-                        ],
-                        "db_nodes": [
-                            "127.0.0.1:49161"
-                        ]
+                        "example": {
+                            "cm_nodes": [
+                                "cm"
+                            ],
+                            "db_nodes": [
+                                "127.0.0.1:49161"
+                            ]
+                        }
                     }
                 },
                 "worker3": {
@@ -65,12 +72,14 @@
                         "setcookie": "test_cookie"
                     },
                     "sys.config": {
-                        "cm_nodes": [
-                            "cm"
-                        ],
-                        "db_nodes": [
-                            "127.0.0.1:49161"
-                        ]
+                        "example": {
+                            "cm_nodes": [
+                                "cm"
+                            ],
+                            "db_nodes": [
+                                "127.0.0.1:49161"
+                            ]
+                        }
                     }
                 }
             }
