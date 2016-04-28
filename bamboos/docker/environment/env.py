@@ -17,7 +17,7 @@ from . import appmock, client, common, zone_worker, cluster_manager, \
 
 
 def default(key):
-    return {'image': 'onedata/worker',
+    return {'image': 'onedata/worker:v30',
             'ceph_image': 'onedata/ceph',
             's3_image': 'lphoward/fake-s3',
             'nfs_image': 'erezhorev/dockerized_nfs_server',
@@ -147,7 +147,7 @@ def up(config_path, image=default('image'), ceph_image=default('ceph_image'),
 echo $?'''
         command = command.format(json.dumps(env_configurator_input))
         docker_output = docker.run(
-            image='onedata/builder',
+            image='onedata/builder:v33',
             interactive=True,
             tty=True,
             rm=True,
